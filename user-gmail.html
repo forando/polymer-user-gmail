@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`user-gmail`
+form for gmail users
+
+@demo demo/index.html 
+-->
+
+<dom-module id="user-gmail">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'user-gmail',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'user-gmail',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
