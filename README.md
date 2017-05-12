@@ -1,6 +1,8 @@
 # \<user-gmail\>
 
-form for gmail users
+Form for gmail users.
+
+User is prompted to insert only his login and '@gmail.com' is added automatically.
 
 ## Install the Polymer-CLI
 
