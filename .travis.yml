@@ -5,15 +5,21 @@ before_script:
 - polymer install --variants
 - sudo mv /usr/bin/google-chrome /usr/bin/google-chrome-old
 - sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
+- sleep 3 # give xvfb some time to start
+- rackup  # start a Web server
+- sleep 3 # give Web server some time to bind to sockets, etc
 node_js: stable
+addons:
+  sauce_connect:
+    username: "forando"
+    access_key: "99bc8913-3226-4d9a-b4e1-4b9eb344f986"
 script:
 #- xvfb-run polymer test --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test -s 'windows 10/microsoftedge@14' -s 'windows 8.1/internet explorer@11' -s 'os x 10.11/safari@9'; fi
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test; fi
 dist: trusty
 global_env: 
 group: stable
 os: linux
-env:
-  global:
-  - secure: YG1Nmb0D3mdYZJ30vb+/l80mAJuwxWPhkmjO14hDSQw1PmryaCb/lIrhx8zlFj3Pv+C4EnNigVb3ZP1jSsTFqcOs2MbnAqDEkSwovM1KUc+1kht3BXSICUFj14r8J3OivaIvk5HW5jjReC0hyjKPomD5IArcsHfLONMx+GNpclddcczwo8Alo3efa6e3tltlHEiM4U3xpUiHgKPxX3hGo2TR7Peq2aKaWDr62NmNU5qZ2no5yGHXvrIfODp85jM4/DM5Tn+YtQF25JjNJsyCitxJEnNmMQkbPdO1ThzVOaszVRujfhfKZloFc7bfN+82uhQC2VgGX8660h7FPU0e7p9KXbC/speT33hXhnvP2LcaDVQPz//CzC9J5E2ckpDC6za8/cMy4i8oEMUlm86OYfuF/XKK8HLO/zpf1xV+l745VFAT4t9XliCqHUY99EBNibRJUXlkfnayIHwnEWfNb8I02mEk5dmV4cl/F3xL343o0HBY21RTEpqXA4kQsW9JzdcYrfPmxp0y0hDVTDDb9w6DDjuvxyTM+CQ3W38Z7MrkV1gHb8HmzbpE7PSOUPPJ+IiC0Ud64itqagb1n9XDfLp/f5zWTwre88IuJkASLIAgtNyr0lNL2aFddWGdK4l94ZmUnbBq41D6pT/srIZQMceDk+vNhVLAQCZCWADLdk4=
-  - secure: t5U+mVJBYz+JCIhFLgVGeRPEIfiMnc12GzZU9pHUxeqbYh9zbYpBqI58IvWpnfRLqHqn5EYHjBU+PIrzWvsjncT+A4l594Ujbdy0enQ3hJKNmmlxYZjBQuNkWLtUjOjVbVcILHVanVG3Qy9NoNsgDfY8uCZ88pPTpax+ZBWILYi04fttglMe6uRgiz+CS3lzxNUi5K0L9wR3iINSH6x/9voOJ9pNRU3AUuKfXB8SNSgAGrUC3Eoqo4G3vLiWo0Zsyec1/uapho6of6HnDL+mPopVzsr8MBuVNj238ClxR8XvNZhcu6EoEfcd8s/G3NreyC0AMF5QP0iticvAJhMtMuyp9T8Ff2k2YKXfEbBd4ZGw35yqjlnn9yxt5kgh2jrw//vX/bP+egdvVbn84fQwFDA9WiZNIp2tM+SYiGnTpbMiH+hPhu4SJh0bUQcAtGibomO2hK+87iQ0wW+MOgV07qdJ2dN0C8q5tnodUYpYRhxMMwal6HTf/uxdRlBk5FVlk7k+lp6gdCkxD+mq53GFNRcNBi4PItIs/JWiMbSYoZjLaME92ea98S9Lvf0+saQOR25QUkeIH4ioXnjsVKQDG5MsqycYFr4ufoSGF2m28M3Idb3aeDMzQmiwVIxHTkoTJGG7WHbobYqbgun1u1pRJ1bJl8JTUcs5x5dBLi4Evzk=
+
