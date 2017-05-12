@@ -4,7 +4,7 @@ before_script:
 - npm install -g bower polymer-cli@next
 - polymer install --variants
 - sudo mv /usr/bin/google-chrome /usr/bin/google-chrome-old
-- sudo mv /usr/bin/google-chrome-beta /usr/bin/google-chrome
+- sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
 node_js: stable
 addons:
   firefox: latest
