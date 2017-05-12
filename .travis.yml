@@ -15,7 +15,7 @@ addons:
     - google-chrome-beta
 script:
 - xvfb-run polymer test
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test -s 'default'; fi
+#- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test -s 'default'; fi
 dist: trusty
 global_env: 
 group: stable
