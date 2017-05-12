@@ -6,16 +6,9 @@ before_script:
 - sudo mv /usr/bin/google-chrome /usr/bin/google-chrome-old
 - sudo mv /usr/bin/google-chrome-stable /usr/bin/google-chrome
 node_js: stable
-addons:
-  firefox: latest
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
 script:
-- xvfb-run polymer test --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test -s 'windows 10/microsoftedge@14' -s 'windows 8.1/internet explorer@11' -s 'os x 10.11/safari@9' -s 'macos 10.12/safari@10' -s 'Linux/chrome@41'; fi
+#- xvfb-run polymer test --skip-plugin sauce
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test -s 'windows 10/microsoftedge@14' -s 'windows 8.1/internet explorer@11' -s 'os x 10.11/safari@9'; fi
 dist: trusty
 global_env: 
 group: stable
