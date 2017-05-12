@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/forando/polymer-user-gmail.svg?branch=master)](https://travis-ci.org/forando/polymer-user-gmail)
+
 # \<user-gmail\>
 
 Form for gmail users.
