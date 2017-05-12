@@ -1,9 +1,24 @@
+<!--
+@license
+Copyright (c) Andrii Logoshko. All rights reserved.
+-->
+
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="user-icons.html">
 
 <!--
 `user-gmail`
-form for gmail users
+Material design for gmail user form.
 
+User is prompted to insert only his login and '@gmail.com' is added automatically.
+
+@group Forando Polymer Element
+@element user-gmail
 @demo demo/index.html 
 -->
 
@@ -13,8 +28,34 @@ form for gmail users
       :host {
         display: block;
       }
+      #user-container{
+        padding: 20px 0;
+      }
     </style>
-    <h2>Hello [[prop1]]</h2>
+
+    <div id="user-container">
+      <paper-input id="managerName" label="Имя" required
+                   auto-validate allowed-pattern="[a-zA-Zа-яА-ЯёЁ]"
+                   error-message="только буквенные символы!"
+                   value="{{name}}">
+        <paper-icon-button suffix on-click="_clearManagerName" icon="user-icons:clear" alt="clear" title="clear">
+        </paper-icon-button>
+      </paper-input>
+      <paper-input id="email" required label="Логин (до @)" value="{{login}}">
+        <iron-icon icon="user-icons:mail" prefix></iron-icon>
+        <div suffix>@gmail.com</div>
+        <paper-icon-button suffix on-click="_clearEmail" icon="user-icons:clear" alt="clear" title="clear">
+        </paper-icon-button>
+      </paper-input>
+      <paper-dropdown-menu id="rights" label="Права" required>
+        <paper-listbox id="rights_list" class="dropdown-content" selected="{{rights}}">
+          <paper-item level="0">SYSADMIN</paper-item>
+          <paper-item level="1">ADMIN</paper-item>
+          <paper-item level="2">USER</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+    </div>
+
   </template>
 
   <script>
@@ -22,13 +63,63 @@ form for gmail users
 
       is: 'user-gmail',
 
-      properties: {
-        prop1: {
-          type: String,
-          value: 'user-gmail',
+        properties: {
+            name:{
+                type: String
+            },
+            email:{
+                type: String
+            },
+            login:{
+                type: String,
+                computed: '_computeLogin(email)'
+            },
+            role:{
+                type: String
+            },
+            rights:{
+                type: String,
+                computed: '_computeRights(role)'
+            },
+            /**
+             * Indicates selected role in dropdown list.
+             */
+            level:{
+                type: Number
+            },
+            user: {
+                type: Object
+            }
         },
-      },
 
+        _computeLogin: function(email){
+            return email.split('@').shift();
+        },
+
+        _computeRights: function(role){
+            return role;
+        },
+
+        _clearManagerName: function(){
+            this.$.managerName.value = '';
+        },
+
+        _clearEmail: function(){
+            this.$.email.value = '';
+        },
+
+        validateFields: function(){
+            if(!this.$.managerName.validate()) return false;
+            if(!this.$.email.validate()) return false;
+            return this.$.rights.validate();
+        },
+
+        getUserForUpdate: function(){
+            this.user.name = this.$.email.value.trim() + '@gmail.com';
+            this.user.managerName = this.$.managerName.value;
+            this.user.role = this.$.rights_list.selected;
+            return this.user;
+        }
     });
   </script>
 </dom-module>
