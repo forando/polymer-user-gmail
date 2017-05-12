@@ -15,8 +15,8 @@ before_script:
 - bower install
 - polylint
 script:
-- xvfb-run wct
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct -s 'default'; fi
+- xvfb-run wct --skip plugin sauce
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct -s 'default' --skip plugin local; fi
 env:
   global:
   - secure: NQCq2PnVtdIe51gya/IxMliTxbP3eUrbahZ9V+vvq2I9lpI3ya14tTQBWF0HzVgPK+ydustQK9V6NzLGtsLjtLGmQUgWav6jwPnrClHVvs/giXDtT7QStF/62hEzOYGGyZE0XuDgLHPR31dzLHV/p+AkGK8yef/hEmld5TV/EK4v6Dprh+fuMJSX/3PTR4E3E+1nLdEsnQyWzS7s+J2ZNhjXqtHrPpdwpM/X5BKEMgVbe3qfh3ffjrqKD/XcTkhLdeqZ5YKVXtXjW6UhObrpMFl84RR3APIUuFwseXQKHVqoN9XuVuZxT7q8cXbwx+zrK0PXyWuvhsqcK2WnUbgCh7TZr2iikHcVNHUiUJA+0K6yKvh6UGnHL67cO2TnPRXvEsQzaa3rokTMvFQbngzRG+B4jb24sSCh+8tyNXutRY2PEVB+FpB+XqmROYGw4wBGw6dPRPL1fAvbHw5CkK8z36FVHWE4TjUogOCSvDW1Pvv6wQ0cA310mkaNE1Y6u0Zs9Ke1rDJZddirPQWHJ1H31A7MA7Pswk5Q9LUZZRiNmDgApeWviReFyRWcEAx2c4V6d8882tVHZ3bzeXidJMYymek8Wh2fD8q/8hyOKmCyRqkXBurv9eOQb678HTq7OmATp02XdFxep4z26FghTKgrdUu2HNBJxceco+/GzLa2jdk=
